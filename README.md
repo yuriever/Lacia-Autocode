@@ -12,25 +12,25 @@ Install from this repository:
 
 2. install the paclet:
 
-    ``` 
+    ``` wl
     PacletInstall@File["the/path/of/paclet"];
     ```
 
 Load the package(s):
 
-``` 
+``` wl
 Needs["Lacia`Autocode`"];
 ```
 
 ### Upgrade
 
-```
+``` wl
 PacletInstall["Lacia/Autocode"];
 ```
 
 ### Uninstall
 
-```
+``` wl
 PacletUninstall["Lacia/Autocode"];
 ```
 
