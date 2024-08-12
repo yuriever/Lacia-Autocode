@@ -2,9 +2,7 @@
 
 Code tools.
 
-## How to use
-
-### Install
+## Install
 
 Install from this repository:
 
@@ -13,25 +11,35 @@ Install from this repository:
 2. install the paclet:
 
     ``` wl
-    PacletInstall@File["the/path/of/paclet"];
+    PacletInstall@File["the/path/of/paclet"]
     ```
 
-Load the package(s):
+Install manually:
+
+1. download this repository;
+
+2. move it to the paclet directory:
+
+    ``` wl
+    $UserBasePacletsDirectory
+    ```
+
+## Load
 
 ``` wl
-Needs["Lacia`Autocode`"];
+Needs["Lacia`Autocode`"]
 ```
 
-### Upgrade
+## Upgrade
 
 ``` wl
-PacletInstall["Lacia/Autocode"];
+PacletInstall["Lacia/Autocode"]
 ```
 
-### Uninstall
+## Uninstall
 
 ``` wl
-PacletUninstall["Lacia/Autocode"];
+PacletUninstall["Lacia/Autocode"]
 ```
 
-### Documentation
+## Documentation
