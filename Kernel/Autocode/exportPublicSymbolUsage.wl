@@ -40,7 +40,10 @@ Begin["`Private`"];
 (*Constant*)
 
 
-$usageFileName = "Usage.wl"
+$usageFileName = <|
+    "WL"->"Usage.wl",
+    "MD"->"Usage.md"
+|>
 
 
 (* ::Subsection:: *)
@@ -53,10 +56,19 @@ exportPublicSymbolUsage[
     HoldPattern[excludedFileList:{___String}:{$usageFileName}],
     excludedSymbolList:{___String}:{}
 ] :=
-    File@Export[
-        FileNameJoin@{targetDir,$usageFileName},
-        getUsageFromDirectory[dir,excludedFileList,excludedSymbolList],
-        "Text"
+    Module[ {usage},
+        usage =
+            getUsageFromDirectory[dir,excludedFileList,excludedSymbolList];
+        File@Export[
+            FileNameJoin@{targetDir,$usageFileName["WL"]},
+            usage["WL"],
+            "Text"
+        ];
+        File@Export[
+            FileNameJoin@{targetDir,$usageFileName["MD"]},
+            usage["MD"],
+            "Text"
+        ];
     ];
 
 
@@ -67,9 +79,17 @@ exportPublicSymbolUsage[
 getUsageFromDirectory[dir_,excludedFileList_List,excludedSymbolList_List] :=
     fileListFromDirectory[dir,excludedFileList]//
 		(*get the list of usages from *.wl files.*)
-		Query[All,<|"FileName"->#FileName,"Usage"->getUsageFromSingleFile[#File,excludedSymbolList]|>&]//
-			(*mark the usages from different files.*)
-			Query[All,"\n\n(*"<>#FileName<>"*)\n\n"<>#Usage&];
+		Query[All,<|
+            "FileName"->#FileName,
+            getUsageFromSingleFile[#File,excludedSymbolList]
+        |>&]//
+	    	(*drop the files without usage.*)
+	    	Select[KeyExistsQ[#,"WL"]&&KeyExistsQ[#,"MD"]&]//
+				(*merge and mark the usages from different files.*)
+				Query[All,<|
+                    "WL"->"(* "<>#FileName<>" *)\n\n"<>#WL,
+                    "MD"->"<!-- "<>#FileName<>" -->\n\n"<>#MD
+                |>&]//Merge[StringRiffle[#,"\n\n\n"]&];
 
 
 getUsageFromSingleFile[file_File,excludedSymbolList_List] :=
@@ -83,7 +103,33 @@ getUsageListFromAST[excludedSymbolList_List][ast_] :=
 
 
 postFormat[usageList_List] :=
-    usageList//Query[All,StringTemplate["`Symbol`::usage =\n\t`Usage`;"]]//StringRiffle[#,"\n\n"]&;
+    usageList//Query[All,<|
+        "WL"->
+            TemplateObject[
+                {TemplateSlot["Symbol"],"::usage =\n\t",TemplateSlot["Usage"],";"},
+                InsertionFunction->ToString,
+                CombinerFunction->StringJoin
+            ],
+        "MD"->
+            TemplateObject[
+                {"* `#!wl ",TemplateSlot["Symbol"],"`"," - ",TemplateSlot["Usage"]},
+                InsertionFunction->markdownEscape@*(
+                    If[ StringStartsQ[#,"StringJoin"],
+                        ToString@ToExpression[#],
+                        (*Else*)
+                        StringReplace[#,StartOfString~~"\""~~str___~~"\""~~EndOfString:>str]
+                    ]&
+                ),
+                CombinerFunction->StringJoin
+            ]
+    |>]//Merge[StringRiffle[#,"\n\n"]&];
+
+
+markdownEscape[str_] :=
+    str//StringReplace[{
+        "`"->"\`",
+        "\n"->" "
+    }];
 
 
 fileListFromDirectory[dir_,excludedFileList_List] :=

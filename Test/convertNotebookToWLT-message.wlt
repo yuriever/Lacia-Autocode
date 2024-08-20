@@ -78,7 +78,7 @@ VerificationTest[
 VerificationTest[
 	g2[x]
 	,
-	x
+	Quiet[x]
 	,
 	{Global`g2::test}
 	,

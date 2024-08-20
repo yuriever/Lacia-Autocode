@@ -123,6 +123,7 @@ trimCellList[cellList_List] :=
     	Query[All,
             If[ #Type==="Code",
                 <|#,"Type"->"Input"|>,
+                (*Else*)
                 #
             ]&
         ];
@@ -167,7 +168,7 @@ cellListToTestString[notebookName_][cellList_List,id_Integer] :=
             (*Else*)
             templateOfTestString[{
                 getStringOf["Input",cellList],
-                getStringOf["Output",cellList],
+                getStringOf["OutputThatCanSendMessage",cellList],
                 msgString,
                 "TestID->"<>"\""<>ToString[id]<>"-"<>notebookName<>"\""
             }]
@@ -199,6 +200,9 @@ getStringOf["InputWithInputForm",cellList_List] :=
 
 getStringOf["Output",cellList_List] :=
     cellList//Query[SelectFirst[#Type==="Output"&],#Expr&,FailureAction->"Replace"]//indentNewline;
+
+getStringOf["OutputThatCanSendMessage",cellList_List] :=
+    cellList//Query[SelectFirst[#Type==="Output"&],"Quiet["<>#Expr<>"]"&,FailureAction->"Replace"]//indentNewline;
 
 getStringOf["Message",cellList_List] :=
     cellList//Query[Select[#Type==="Message"&],#Expr&]//Flatten//StringRiffle[#,{"{",",","}"}]&;

@@ -36,12 +36,14 @@ Begin["`Private`"];
 reportWLT[dir_?DirectoryQ] :=
     Module[ {report},
         report =
-            TestReport[
-                FileNames["*.wlt",dir],
-                HandlerFunctions-><|
-                    "TestEvaluated"->(Which[#Outcome!="Success",Echo@#TestObject]&)
-                |>
-            ];
+	        Block[{Print},
+	            TestReport[
+	                FileNames["*.wlt",dir],
+	                HandlerFunctions-><|
+	                    "TestEvaluated"->(Which[#Outcome=!="Success",Echo@#TestObject]&)
+	                |>
+	            ]
+	        ];
         CellPrint@ExpressionCell[
             report//dropTitleInReport,
             "Output",

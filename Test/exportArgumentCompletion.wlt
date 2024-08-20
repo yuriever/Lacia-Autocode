@@ -40,7 +40,7 @@ VerificationTest[
 VerificationTest[
 	Lacia`Autocode`exportArgumentCompletion`Private`maxNumberOfNormalArgument["h"]
 	,
-	0
+	Quiet[0]
 	,
 	{Lacia`Autocode`exportArgumentCompletion::hasOwnValues}
 	,
@@ -74,7 +74,7 @@ VerificationTest[
 VerificationTest[
 	Lacia`Autocode`exportArgumentCompletion`Private`getOptionCompletionData["h"]
 	,
-	"h" -> {}
+	Quiet["h" -> {}]
 	,
 	{Lacia`Autocode`exportArgumentCompletion::hasOwnValues,Lacia`Autocode`exportArgumentCompletion::noStringOptions}
 	,

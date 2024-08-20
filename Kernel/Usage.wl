@@ -1,12 +1,10 @@
-
-
-(*buildLibrary.wl*)
+(* buildLibrary.wl *)
 
 buildLibrary::usage =
 	"build the library.";
 
 
-(*convertNotebookToWLT.wl*)
+(* convertNotebookToWLT.wl *)
 
 convertNotebookToWLT::usage =
 	"convert notebooks in the directory to *.wlt test files.";
@@ -15,7 +13,7 @@ $reformatCode::usage =
 	"the format of input in tests.";
 
 
-(*dependency.wl*)
+(* dependency.wl *)
 
 dependency::usage =
 	"symbol dependency from definitions.";
@@ -30,7 +28,7 @@ $dependencyExclusion::usage =
 	"the excluded contexts in dependency*.";
 
 
-(*exportArgumentCompletion.wl*)
+(* exportArgumentCompletion.wl *)
 
 exportArgumentCompletion::usage =
 	"export the argument completion data.";
@@ -39,7 +37,7 @@ $argumentFileName::usage =
 	"default name of the argument completion file.";
 
 
-(*exportPublicSymbolUsage.wl*)
+(* exportPublicSymbolUsage.wl *)
 
 exportPublicSymbolUsage::usage =
 	"export the usages of public symbols in the directory.";
@@ -48,13 +46,13 @@ $usageFileName::usage =
 	"default name of the usage file.";
 
 
-(*reportSuspiciousSet.wl*)
+(* reportSuspiciousSet.wl *)
 
 reportSuspiciousSet::usage =
 	"report suspicious set in the *.wl files in the directory.";
 
 
-(*reportWLT.wl*)
+(* reportWLT.wl *)
 
 reportWLT::usage =
 	"report the unit test in the directory.";
