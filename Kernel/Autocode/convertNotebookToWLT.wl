@@ -53,15 +53,20 @@ $privateContext = "Lacia`Autocode`convertNotebookToWLT`temp`";
 
 
 (* ::Subsection:: *)
+(*Option*)
+
+
+convertNotebookToWLT//Options = {
+    "ExcludedFile"->{}
+};
+
+
+(* ::Subsection:: *)
 (*Main*)
 
 
-convertNotebookToWLT[
-    dir_?DirectoryQ,
-    targetDir_?DirectoryQ,
-    excludedFileList:{___String}:{}
-] :=
-    fileListFromDirectory[dir,excludedFileList]//
+convertNotebookToWLT[dir_?DirectoryQ,targetDir_?DirectoryQ,opts:OptionsPattern[]] :=
+    fileListFromDirectory[dir,OptionValue["ExcludedFile"]]//
 		Query[All,<|#,"TestFile"->convertSingleNotebookToWLT[#File,targetDir]|>&]//
 			Query[All,<|"IsSuccess"->!FailureQ[#TestFile],#|>&]//Dataset;
 

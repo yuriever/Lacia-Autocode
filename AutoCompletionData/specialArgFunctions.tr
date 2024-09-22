@@ -3,4 +3,6 @@
     "SymbolOrRelation"}}, "dependencyGraph" -> 
   {0, {"HideContext", "HideSystemSymbol", "HideSymbolWithoutDefinition", 
     "HideSymbolWithOwnValue"}}, "reportSuspiciousSet" -> 
-  {0, {"ExcludedFile", "ExcludedSymbol", "ExcludeDollaredSymbol"}}}
+  {0, {"ExcludedFile", "ExcludedSymbol", "ExcludeDollaredSymbol"}}, 
+ "convertNotebookToWLT" -> {0, 0, {"ExcludedFile"}}, 
+ "exportPublicSymbolUsage" -> {0, 0, {"ExcludedFile", "ExcludedSymbol"}}}

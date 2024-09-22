@@ -47,18 +47,23 @@ $usageFileName = <|
 
 
 (* ::Subsection:: *)
+(*Option*)
+
+
+exportPublicSymbolUsage//Options = {
+    "ExcludedFile":>{$usageFileName},
+    "ExcludedSymbol"->{}
+};
+
+
+(* ::Subsection:: *)
 (*Main*)
 
 
-exportPublicSymbolUsage[
-    dir_?DirectoryQ,
-    targetDir_?DirectoryQ,
-    HoldPattern[excludedFileList:{___String}:{$usageFileName}],
-    excludedSymbolList:{___String}:{}
-] :=
+exportPublicSymbolUsage[dir_?DirectoryQ,targetDir_?DirectoryQ,opts:OptionsPattern[]] :=
     Module[ {usage},
         usage =
-            getUsageFromDirectory[dir,excludedFileList,excludedSymbolList];
+            getUsageFromDirectory[dir,OptionValue["ExcludedFile"],OptionValue["ExcludedSymbol"]];
         {
             File@Export[
                 FileNameJoin@{targetDir,$usageFileName["WL"]},
