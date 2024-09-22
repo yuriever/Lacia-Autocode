@@ -40,7 +40,7 @@ Begin["`Private`"];
 reportSuspiciousSet//Options = {
     "ExcludedFile"->{},
     "ExcludedSymbol"->{},
-    "ExcludeDollaredSymbol"->True
+    "ExcludeDollaredSymbol"->False
 };
 
 
