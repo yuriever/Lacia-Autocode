@@ -59,16 +59,18 @@ exportPublicSymbolUsage[
     Module[ {usage},
         usage =
             getUsageFromDirectory[dir,excludedFileList,excludedSymbolList];
-        File@Export[
-            FileNameJoin@{targetDir,$usageFileName["WL"]},
-            usage["WL"],
-            "Text"
-        ];
-        File@Export[
-            FileNameJoin@{targetDir,$usageFileName["MD"]},
-            usage["MD"],
-            "Text"
-        ];
+        {
+            File@Export[
+                FileNameJoin@{targetDir,$usageFileName["WL"]},
+                usage["WL"],
+                "Text"
+            ],
+            File@Export[
+                FileNameJoin@{targetDir,$usageFileName["MD"]},
+                usage["MD"],
+                "Text"
+            ]
+        }
     ];
 
 
