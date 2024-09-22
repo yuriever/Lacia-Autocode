@@ -103,10 +103,10 @@ maxNumberOfNormalArgument[funName_String] :=
 
 
 checkOwnValues[funName_String] :=
-    If[ OwnValues[funName]=!={},
+    If[ Quiet@OwnValues[funName]=!={},
         Message[exportArgumentCompletion::hasOwnValues,funName];
         funName
-    ]//Quiet;
+    ];
 
 
 getArgmentPatternFromDownValues[funName_String] :=

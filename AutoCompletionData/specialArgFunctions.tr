@@ -2,4 +2,5 @@
     "HideSymbolWithoutDefinition", "HideSymbolWithOwnValue", 
     "SymbolOrRelation"}}, "dependencyGraph" -> 
   {0, {"HideContext", "HideSystemSymbol", "HideSymbolWithoutDefinition", 
-    "HideSymbolWithOwnValue"}}}
+    "HideSymbolWithOwnValue"}}, "reportSuspiciousSet" -> 
+  {0, {"ExcludedFile", "ExcludedSymbol", "ExcludeDollaredSymbol"}}}

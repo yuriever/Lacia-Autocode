@@ -34,17 +34,30 @@ Begin["`Private`"];
 
 
 (* ::Subsection:: *)
+(*Option*)
+
+
+reportSuspiciousSet//Options = {
+    "ExcludedFile"->{},
+    "ExcludedSymbol"->{},
+    "ExcludeDollaredSymbol"->True
+};
+
+
+(* ::Subsection:: *)
 (*Main*)
 
 
-reportSuspiciousSet[
-    dir_?DirectoryQ,
-    excludedFileList:{___String}:{},
-    excludedSymbolList:{___String}:{}
-] :=
-    fileListFromDirectory[dir,excludedFileList]//
-        Query[All,<|"SuspiciousSet"->getSuspiciousSetFromSingleFile[#File,excludedSymbolList],"FileName"->#FileName|>&]//
-        	Dataset[#,MaxItems->{All,All,All},HiddenItems->{"RHS"}]&;
+reportSuspiciousSet[dir_?DirectoryQ,opts:OptionsPattern[]] :=
+    fileListFromDirectory[dir,OptionValue["ExcludedFile"]]//
+        Query[All,
+            <|
+                "SuspiciousSet"->ifExcludeDollaredSymbol[OptionValue["ExcludeDollaredSymbol"]][
+                    getSuspiciousSetFromSingleFile[#File,OptionValue["ExcludedSymbol"]]
+                ],
+                "FileName"->#FileName
+            |>&
+        ]//Dataset[#,MaxItems->{All,All,All},HiddenItems->{"RHS"}]&;
 
 
 (* ::Subsection:: *)
@@ -124,6 +137,17 @@ postFormat[Nothing] :=
 
 getNodePosition[node_] :=
     Part[node,3,Key[Source],1];
+
+
+(* ::Subsubsection:: *)
+(*Dollared symbol exclusion*)
+
+
+ifExcludeDollaredSymbol[True][data_] :=
+    Select[data,!StringStartsQ[#LHS,"$"]&];
+
+ifExcludeDollaredSymbol[False][data_] :=
+    data;
 
 
 (* ::Subsubsection:: *)
