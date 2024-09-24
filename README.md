@@ -2,6 +2,8 @@
 
 Code tools.
 
+## Documentation
+
 ## Install
 
 Install from this repository:
@@ -41,5 +43,3 @@ PacletInstall["Lacia/Autocode"]
 ``` wl
 PacletUninstall["Lacia/Autocode"]
 ```
-
-## Documentation
