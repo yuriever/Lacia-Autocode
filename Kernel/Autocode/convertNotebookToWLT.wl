@@ -67,8 +67,8 @@ convertNotebookToWLT//Options = {
 
 convertNotebookToWLT[dir_?DirectoryQ,targetDir_?DirectoryQ,opts:OptionsPattern[]] :=
     fileListFromDirectory[dir,OptionValue["ExcludedFile"]]//
-		Query[All,<|#,"TestFile"->convertSingleNotebookToWLT[#File,targetDir]|>&]//
-			Query[All,<|"IsSuccess"->!FailureQ[#TestFile],#|>&]//Dataset;
+        Query[All,<|#,"TestFile"->convertSingleNotebookToWLT[#File,targetDir]|>&]//
+            Query[All,<|"IsSuccess"->!FailureQ[#TestFile],#|>&]//Dataset;
 
 
 (* ::Subsection:: *)
@@ -93,7 +93,7 @@ getTestStringFromNotebook[notebook_] :=
         notebookName =
             FileNameTake[notebook];
         notebook//importCellListFromNotebook//trimCellList//groupCellListByOutput//
-        	groupedCellListToTestStringList[notebookName]//postFormat[notebookName]
+            groupedCellListToTestStringList[notebookName]//postFormat[notebookName]
     ];
 
 
@@ -119,13 +119,13 @@ importCellListFromNotebook[notebook_] :=
             ];
         EndPackage[];
         {cellTypeList,exprList,boxList}//Transpose//
-        	Query[All,<|"Type"->#[[1]],"Expr"->#[[2]],"Box"->#[[3]]|>&]
+            Query[All,<|"Type"->#[[1]],"Expr"->#[[2]],"Box"->#[[3]]|>&]
     ];
 
 
 trimCellList[cellList_List] :=
     cellList//Query[Select[MatchQ[#Type,"Input"|"Code"|"Output"|"Message"]&]]//
-    	Query[All,
+        Query[All,
             If[ #Type==="Code",
                 <|#,"Type"->"Input"|>,
                 (*Else*)
@@ -270,8 +270,8 @@ endGlobalContext[notebookName_] :=
 
 fileListFromDirectory[dir_,excludedFileList_List] :=
     FileNames["*.nb",dir]//
-    	Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
-	    	Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
+        Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
+            Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
 
 
 (* ::Subsection:: *)

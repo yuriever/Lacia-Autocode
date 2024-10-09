@@ -66,7 +66,7 @@ reportSuspiciousSet[dir_?DirectoryQ,opts:OptionsPattern[]] :=
 
 getSuspiciousSetFromSingleFile[file_File,excludedSymbolList_List] :=
     file//CodeParse//Cases[#,_ContextNode,Infinity]&//screenVerbatimPattern//
-    	getSuspiciousSetFromAST[excludedSymbolList]//postFormat;
+        getSuspiciousSetFromAST[excludedSymbolList]//postFormat;
 
 
 screenVerbatimPattern[ast_] :=
@@ -156,8 +156,8 @@ ifExcludeDollaredSymbol[False][data_] :=
 
 fileListFromDirectory[dir_,excludedFileList_List] :=
     FileNames["*.wl",dir]//
-    	Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
-	    	Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
+        Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
+            Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
 
 
 (* ::Subsection:: *)

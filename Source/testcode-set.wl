@@ -13,7 +13,7 @@ f2;
 
 g0;
 g1::usage =
-	"test.";
+    "test.";
 
 
 Begin["`Private`"];
@@ -45,9 +45,9 @@ f2//Options = {
 
 f2[x_] :=
     With[{y=x},
-	    y;
-	    z=y;
-	    x
+        y;
+        z=y;
+        x
     ]
 
 
@@ -60,23 +60,23 @@ g0[_] :=
 
 g1[x_] :=
     Module[ {temp},
-		Module[{temp1},
-			temp=x;
-			temp1=temp;
-		]
+        Module[{temp1},
+            temp=x;
+            temp1=temp;
+        ]
     ];
 
 
 g1[x_] :=
     Module[ {temp},
-	    Module[{temp1},
-			Module[{temp2},
-				temp=x;
-				temp1=temp;
-				temp2=temp1;
-				temp2
-			]
-	    ]
+        Module[{temp1},
+            Module[{temp2},
+                temp=x;
+                temp1=temp;
+                temp2=temp1;
+                temp2
+            ]
+        ]
     ];
 
 

@@ -85,15 +85,15 @@ exportPublicSymbolUsage[dir_?DirectoryQ,targetDir_?DirectoryQ,opts:OptionsPatter
 
 getUsageFromDirectory[dir_,excludedFileList_List,excludedSymbolList_List] :=
     fileListFromDirectory[dir,excludedFileList]//
-		(*get the list of usages from *.wl files.*)
-		Query[All,<|
+        (*get the list of usages from *.wl files.*)
+        Query[All,<|
             "FileName"->#FileName,
             getUsageFromSingleFile[#File,excludedSymbolList]
         |>&]//
-	    	(*drop the files without usage.*)
-	    	Select[KeyExistsQ[#,"WL"]&&KeyExistsQ[#,"MD"]&]//
-				(*merge and mark the usages from different files.*)
-				Query[All,<|
+            (*drop the files without usage.*)
+            Select[KeyExistsQ[#,"WL"]&&KeyExistsQ[#,"MD"]&]//
+                (*merge and mark the usages from different files.*)
+                Query[All,<|
                     "WL"->"(* "<>#FileName<>" *)\n\n"<>#WL,
                     "MD"->"<!-- "<>#FileName<>" -->\n\n"<>#MD
                 |>&]//Merge[StringRiffle[#,"\n\n\n"]&];
@@ -105,8 +105,8 @@ getUsageFromSingleFile[file_File,excludedSymbolList_List] :=
 
 getUsageListFromAST[excludedSymbolList_List][ast_] :=
     ast//DeleteCases[#,_ContextNode,Infinity]&//
-	    Cases[#,patternOfUsage,Infinity]&//
-    		Query[Select[!MemberQ[excludedSymbolList,#Symbol]&]];
+        Cases[#,patternOfUsage,Infinity]&//
+            Query[Select[!MemberQ[excludedSymbolList,#Symbol]&]];
 
 
 postFormat[usageList_List] :=
@@ -141,8 +141,8 @@ markdownEscape[str_] :=
 
 fileListFromDirectory[dir_,excludedFileList_List] :=
     FileNames["*.wl",dir]//
-    	Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
-	    	Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
+        Query[All,<|"FileName"->FileNameTake[#],"File"->File[#]|>&]//
+            Query[Select[!MatchQ[#FileName,Alternatives@@excludedFileList]&]];
 
 
 (* ::Subsection:: *)

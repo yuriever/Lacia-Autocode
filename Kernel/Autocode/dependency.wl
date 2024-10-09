@@ -96,10 +96,10 @@ dependency[
     OptionsPattern[]
 ] :=
     Hold[symbol]//getEdgeFromDefinition[OptionValue["HideSystemSymbol"],exclusionList,limit]//
-		ifDeleteSymbolOrEdgeWithoutDefinition[OptionValue["HideSymbolWithoutDefinition"]]//
-			ifDeleteSymbolOrEdgeWithOwnValue[OptionValue["HideSymbolWithOwnValue"]]//
-				ifGetSymbolFromEdge[OptionValue["SymbolOrRelation"]]//
-					ifReplaceSymbolByName[OptionValue["HideContext"]];
+        ifDeleteSymbolOrEdgeWithoutDefinition[OptionValue["HideSymbolWithoutDefinition"]]//
+            ifDeleteSymbolOrEdgeWithOwnValue[OptionValue["HideSymbolWithOwnValue"]]//
+                ifGetSymbolFromEdge[OptionValue["SymbolOrRelation"]]//
+                    ifReplaceSymbolByName[OptionValue["HideContext"]];
 
 
 (* ::Subsubsection:: *)
@@ -130,9 +130,9 @@ dependencyGraph[
     Module[ {maxDepth,relationList,coloredEdgeList},
         relationList =
             Hold[symbol]//getEdgeFromDefinition[OptionValue["HideSystemSymbol"],exclusionList,limit]//
-				ifDeleteSymbolOrEdgeWithoutDefinition[OptionValue["HideSymbolWithoutDefinition"]]//
-					ifDeleteSymbolOrEdgeWithOwnValue[OptionValue["HideSymbolWithOwnValue"]]//
-						ifReplaceSymbolByName[OptionValue["HideContext"]];
+                ifDeleteSymbolOrEdgeWithoutDefinition[OptionValue["HideSymbolWithoutDefinition"]]//
+                    ifDeleteSymbolOrEdgeWithOwnValue[OptionValue["HideSymbolWithOwnValue"]]//
+                        ifReplaceSymbolByName[OptionValue["HideContext"]];
         maxDepth =
             Quiet@Check[
                 relationList//MaximalBy[Last]//Extract[{1,-1}],
