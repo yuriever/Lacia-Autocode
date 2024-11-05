@@ -10,6 +10,8 @@ BeginPackage["Lacia`Autocode`"];
 Get["Lacia`Autocode`Usage`"];
 
 
+Get["Lacia`Autocode`AST`"];
+
 Get["Lacia`Autocode`buildLibrary`"];
 
 Get["Lacia`Autocode`convertNotebookToWLT`"];

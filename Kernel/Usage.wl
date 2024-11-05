@@ -1,3 +1,12 @@
+(* AST.wl *)
+
+ASTHierarchy::usage =
+	"return the hierarchical structure of the AST.";
+
+ASTHierarchyPrint::usage =
+	"print the hierarchical structure of the AST.";
+
+
 (* buildLibrary.wl *)
 
 buildLibrary::usage =

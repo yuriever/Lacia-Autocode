@@ -1,3 +1,10 @@
+<!-- AST.wl -->
+
+* `#!wl ASTHierarchy` - return the hierarchical structure of the AST.
+
+* `#!wl ASTHierarchyPrint` - print the hierarchical structure of the AST.
+
+
 <!-- buildLibrary.wl -->
 
 * `#!wl buildLibrary` - build the library.

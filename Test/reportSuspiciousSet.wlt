@@ -24,7 +24,7 @@ VerificationTest[
 VerificationTest[
 	Lacia`Autocode`reportSuspiciousSet`Private`getSuspiciousSetFromSingleFile[File[FileNameJoin[{$thisSourceDir, "testcode-set.wl"}]], {}]
 	,
-	{Association["LHS" -> "f0[]", "RHS" -> "1", "Position" -> {25, 1}], Association["LHS" -> "List[x, y]", "RHS" -> "List[1, 2]", "Position" -> {22, 1}], Association["LHS" -> "g1", "RHS" -> "1", "Position" -> {37, 9}], Association["LHS" -> "z", "RHS" -> "y", "Position" -> {49, 6}]}
+	{Association["LHS" -> "f0[]", "RHS" -> "1", "Position" -> {25, 1}], Association["LHS" -> "List[x, y]", "RHS" -> "List[1, 2]", "Position" -> {22, 1}], Association["LHS" -> "g1", "RHS" -> "1", "Position" -> {37, 9}], Association["LHS" -> "z", "RHS" -> "y", "Position" -> {49, 9}]}
 	,
 	TestID->"2-reportSuspiciousSet.nb"
 ]
